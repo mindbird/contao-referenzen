@@ -27,7 +27,7 @@ $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['reference_category'] = array(
         'options_callback' => array('Reference\Tables\ReferenceTables', 'optionsCallbackCategory'),
         'includeBlankOption' => true
     ),
-    'sql' => "varchar(10) unsigned NOT NULL default ''"
+    'sql' => "varchar(10) NOT NULL default ''"
 );
 
 $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['reference_random'] = array(
