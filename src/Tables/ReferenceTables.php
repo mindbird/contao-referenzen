@@ -15,17 +15,6 @@ class ReferenceTables extends Backend
         return $this->getTemplateGroup('reference_');
     }
 
-    public function generateLabel($row, $label)
-    {
-        $return = '<div>' . $label . '</div>';
-        $objFile = \FilesModel::findByPk(deserialize($row['logo']));
-        if ($objFile->path != '') {
-            $return = '<figure style="float: left; margin-right: 1em;"><img src="' . Image::get($objFile->path, 80, 50, 'center_center') . '"></figure>';
-        }
-
-        return $return;
-    }
-
     public function listreference($row)
     {
         return '<div>' . $row['reference'] . '</div>';

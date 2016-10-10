@@ -42,14 +42,10 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
             'mode' => 1,
             'flag' => 1,
             'fields' => array(
-                'reference'
+                'title'
             ),
             'headerFields' => array(
                 'title'
-            ),
-            'child_record_callback' => array(
-                'Reference\Tables\ReferenceTables',
-                'listReference'
             ),
             'panelLayout' => 'sort,filter,search,limit'
         ),
