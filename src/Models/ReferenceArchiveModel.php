@@ -6,6 +6,6 @@ use Contao\Model;
 
 class ReferenceArchiveModel extends Model {
 
-	protected static $strTable = 'tl_company_reference';
+	protected static $strTable = 'tl_reference';
 
 }

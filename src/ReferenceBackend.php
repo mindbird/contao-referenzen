@@ -25,7 +25,7 @@ class ReferenceBackend extends Backend
         }
 
         // Read jump to page details
-        $objResult = $db->prepare("SELECT jumpTo, reference_archiv FROM tl_module WHERE type=?")->execute('company_list');
+        $objResult = $db->prepare("SELECT jumpTo, reference_archiv FROM tl_module WHERE type=?")->execute('reference_list');
         $arrModules = $objResult->fetchAllAssoc();
 
         if (count($arrModules) > 0) {
@@ -54,14 +54,14 @@ class ReferenceBackend extends Backend
                 // Set the domain (see #6421)
                 $domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
 
-                $arrPids [] = $arrModule ['company_archiv'];
+                $arrPids [] = $arrModule ['reference_archiv'];
                 $references = ReferenceModel::findByPids($arrPids, 0, 0, array(
                     'order' => 'id ASC'
                 ));
                 while ($references->next()) {
-                    $arrCompany = $references->row();
+                    $arrReferences = $references->row();
                     $arrPages [] = $domain . $this->generateFrontendUrl($objParent->row(),
-                            '/referenceID/' . $arrCompany ['id'], $objParent->language);
+                            '/referenceID/' . $arrReferences ['id'], $objParent->language);
                 }
             }
         }

@@ -1,17 +1,6 @@
 <?php
 
 /**
- * Contao Open Source CMS
- *
- * Copyright (C) 2005-2013 Leo Feyer
- *
- * @package unternehmen
- * @author mindbird
- * @license GNU/LGPL
- * @copyright mindbird 2013
- */
-
-/**
  * Table tl_reference
  */
 $GLOBALS['TL_DCA']['tl_reference'] = array(
@@ -46,6 +35,10 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
             ),
             'headerFields' => array(
                 'title'
+            ),
+            'child_record_callback' => array(
+                'Reference\Tables\ReferenceTables',
+                'listReference'
             ),
             'panelLayout' => 'sort,filter,search,limit'
         ),

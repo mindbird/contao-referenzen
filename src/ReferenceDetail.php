@@ -58,9 +58,9 @@ class ReferenceDetail extends Module {
 			$categories = deserialize ( $reference->category );
             $strCategory = '';
 			if (count ( $categories ) > 0) {
-				$objCompanyCategories = $db->prepare ( "SELECT * FROM tl_reference_category WHERE id IN(" . implode ( ',', $categories ) . ")" )->execute (  );
-				while ( $objCompanyCategories->next () ) {
-					$arrCategory [] = $objCompanyCategories->title;
+				$referenceCategories = $db->prepare ( "SELECT * FROM tl_reference_category WHERE id IN(" . implode ( ',', $categories ) . ")" )->execute (  );
+				while ( $referenceCategories->next () ) {
+					$arrCategory [] = $referenceCategories->title;
 				}
 				$strCategory = implode ( ', ', $arrCategory );
 			}

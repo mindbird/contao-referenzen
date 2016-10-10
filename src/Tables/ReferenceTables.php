@@ -1,6 +1,6 @@
 <?php
 
-namespace Reference;
+namespace Reference\Tables;
 
 use Contao\Backend;
 use Contao\DataContainer;

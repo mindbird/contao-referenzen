@@ -6,14 +6,14 @@ use Contao\Model;
 
 class ReferenceModel extends Model {
 	protected static $strTable = 'tl_reference';
-	public static function findItems($intPid, $strCompanyName = '', $intCategory = 0, $intOffset = 0, $intLimit = 0, $strOrder = 'company ASC') {
+	public static function findItems($intPid, $strReferenceName = '', $intCategory = 0, $intOffset = 0, $intLimit = 0, $strOrder = 'title ASC') {
 		$arrOptions = array ();
 		$arrOptions ['column'] [] = 'pid = ?';
 		$arrOptions ['value'] [] = $intPid;
 		
-		if ($strCompanyName != '') {
+		if ($strReferenceName != '') {
 			$arrOptions ['column'] [] = 'reference LIKE ?';
-			$arrOptions ['value'] [] = $strCompanyName . '%';
+			$arrOptions ['value'] [] = $strReferenceName . '%';
 		}
 		
 		if ($intCategory > 0) {
