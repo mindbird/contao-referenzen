@@ -11,7 +11,7 @@ $GLOBALS ['BE_MOD'] ['content'] ['reference'] = array(
 );
 
 /** Frontend */
-array_insert($GLOBALS ['FE_MOD'] ['references'], 1, array(
+array_insert($GLOBALS ['FE_MOD'] ['reference'], 1, array(
     'reference_list' => 'Reference\ReferenceList',
     'reference_detail' => 'Reference\ReferenceDetail'
 ));

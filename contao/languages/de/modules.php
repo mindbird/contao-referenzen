@@ -15,7 +15,7 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['references'] = array('Referenzen', '');
+$GLOBALS['TL_LANG']['MOD']['reference'] = array('Referenzen', '');
 
 
 /**
