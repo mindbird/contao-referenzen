@@ -1,0 +1,15 @@
+<div class="reference block">
+	<?php if ($this->picture) { ?>
+		<figure>
+			<?= $this->insert('picture_default', $this->picture) ?>
+		</figure>
+	<?php } ?>
+
+	<h3><?= $this->reference ?></h3>
+
+	<div class="teaser"><?= $this->teaser ?></div>
+
+	<?php if ($this->link): ?>
+		<a href="<?= $this->link ?>">Zur Reference</a>
+	<?php endif; ?>	
+</div>

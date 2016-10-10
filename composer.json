@@ -1,0 +1,30 @@
+{
+  "name": "mindbird/contao-referenzen",
+  "description": "Simple list of references bundled in archives",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "keywords":["contao", "reference", "Referenzen", "Portfolio"],
+  "type":"contao-module",
+  "authors": [
+    {
+      "name": "mindbird",
+      "email": "info@mindbird.de"
+    }
+  ],
+  "require": {
+    "contao/core-bundle": "~3.2 || ~4.0",
+    "contao-community-alliance/composer-plugin": "~2.4 || ~3.0"
+  },
+  "extra": {
+    "contao": {
+      "sources": {
+        "contao": "system/modules/referenzen"
+      }
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Reference\\": "src/"
+    }
+  }
+}

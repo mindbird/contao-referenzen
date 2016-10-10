@@ -1,0 +1,10 @@
+<div class="filter">
+	<span class="name">
+		<?= $this->strFilterName ?>
+	</span>
+	<form method="GET" name="filterCategory">
+		<select class="category" name="category" onchange="window.location.href =  '<?php print $this->strLink; ?>'.replace('ID',this.value);">
+			<?= $this->strCategoryOptions; ?>
+		</select>
+	</form>
+</div>

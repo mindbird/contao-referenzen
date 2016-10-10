@@ -1,0 +1,15 @@
+<!-- indexer::continue -->
+<div class="reference block">
+	<h2 class="name"><?= $this->title ?></h2>
+
+	<?php if ($this->picture) { ?>
+	<figure>
+		<?= $this->insert('picture_default', $this->picture) ?>
+	</figure>
+	<?php } ?>
+
+	<div class="teaser"><?= $this->teaser ?></div>
+
+	<div class="description"><?= $this->description ?></div>
+</div>
+<!-- indexer::stop -->
