@@ -51,31 +51,12 @@ class ReferenceList extends Module
         $objPage = PageModel::findByIdOrAlias($this->jumpTo);
 
         // Check if filter should be displayed
-        if (!$this->reference_filter_disabled) {
+        if (!$this->reference_filter_disabled && !$this->reference_category) {
             $objTemplateFilter = new FrontendTemplate('reference_list_filter');
 
             // Filter category
             $intFilterCategory = Input::get('filterCategory');
-            $strFilterUrl = '';
-            if ($intFilterCategory > 0) {
-                $strFilterUrl = '&filterCategory=' . $intFilterCategory;
-            }
-
-            // Filter search
-            $strSearch = Input::get('search');
-            $strSearchUrl = 'search=%s';
-            $objTemplateFilter->strLink = $strSearch != '' ? Environment::get('base') . $this->addToUrl(sprintf($strSearchUrl,
-                        $strSearch) . '&filterCategory=ID',
-                    true) : Environment::get('base') . $this->addToUrl('filterCategory=ID', true);
-
-            // Generate letters
-            $arrAlphabet = range('A', 'Z');
-            $strHtml = '<a href="' . $this->addToUrl($strFilterUrl, true) . '">Alle</a> ';
-            for ($i = 0; $i < count($arrAlphabet); $i++) {
-                $strHtml .= '<a href="' . $this->addToUrl(sprintf($strSearchUrl, $arrAlphabet [$i]) . $strFilterUrl,
-                        true) . '">' . $arrAlphabet [$i] . '</a> ';
-            }
-            $objTemplateFilter->strFilterName = $strHtml;
+            $objTemplateFilter->strLink = Environment::get('base') . $this->addToUrl('filterCategory=ID', true);
 
             // Get Categories
             $this->loadLanguageFile('tl_reference_category');
@@ -90,6 +71,9 @@ class ReferenceList extends Module
             }
             $objTemplateFilter->strCategoryOptions = $strOptions;
             $this->Template->strFilter = $objTemplateFilter->parse();
+        } elseif($this->reference_category) {
+            $strSearch = '';
+            $intFilterCategory = $this->reference_category;
         } else {
             $strSearch = '';
             $intFilterCategory = 0;
@@ -142,9 +126,9 @@ class ReferenceList extends Module
             $strOrder);
 
         if ($references) {
-            $this->Template->strCompanies = $this->getReferences($references, $objPage);
+            $this->Template->references = $this->getReferences($references, $objPage);
         } else {
-            $this->Template->strCompanies = 'Mit den ausgewählten Filterkriterien sind keine Einträge vorhanden.';
+            $this->Template->references = 'Mit den ausgewählten Filterkriterien sind keine Einträge vorhanden.';
         }
     }
 

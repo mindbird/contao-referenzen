@@ -56,4 +56,19 @@ class ReferenceTables extends Backend
         return $category;
     }
 
+    public function optionsCallbackReferenceCategory($dc)
+    {
+        $categories = ReferenceCategoryModel::findBy ( 'pid', $dc->activeRecord->reference_archiv, array (
+            'order' => 'title ASC'
+        ) );
+        $category = array();
+        if ($categories) {
+            while ($categories->next()) {
+                $category[$categories->id] = $categories->title;
+            }
+        }
+
+        return $category;
+    }
+
 }

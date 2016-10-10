@@ -5,7 +5,6 @@ $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['numberOfItems'] ['eval'] ['mandat
 $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['reference_archiv'] = array(
     'label' => &$GLOBALS ['TL_LANG'] ['tl_module'] ['reference_archiv'],
     'default' => '',
-    'exclude' => true,
     'inputType' => 'select',
     'foreignKey' => 'tl_reference_archive.title',
     'eval' => array(
@@ -18,13 +17,13 @@ $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['reference_archiv'] = array(
 
 $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['reference_category'] = array(
     'label' => &$GLOBALS ['TL_LANG'] ['tl_module'] ['reference_category'],
-    'default' => '',
-    'exclude' => true,
     'inputType' => 'select',
+    'options_callback' => array(
+        'Reference\Tables\ReferenceTables',
+        'optionsCallbackReferenceCategory'
+    ),
     'eval' => array(
-        'mandatory' => true,
         'tl_class' => 'w50',
-        'options_callback' => array('Reference\Tables\ReferenceTables', 'optionsCallbackCategory'),
         'includeBlankOption' => true
     ),
     'sql' => "varchar(10) NOT NULL default ''"
@@ -32,7 +31,6 @@ $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['reference_category'] = array(
 
 $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['reference_random'] = array(
     'label' => &$GLOBALS ['TL_LANG'] ['tl_module'] ['reference_random'],
-    'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => array(
         'tl_class' => 'w50 m12'
@@ -42,7 +40,6 @@ $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['reference_random'] = array(
 
 $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['reference_filter_disabled'] = array(
     'label' => &$GLOBALS ['TL_LANG'] ['tl_module'] ['reference_filter_disabled'],
-    'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => array(
         'tl_class' => 'w50 m12'
@@ -55,7 +52,6 @@ $GLOBALS ['TL_DCA'] ['tl_module'] ['palettes'] ['reference_detail'] = '{title_le
 $GLOBALS ['TL_DCA'] ['tl_module'] ['fields']['referenceTpl'] = array
 (
     'label' => &$GLOBALS['TL_LANG']['tl_module']['referenceTpl'],
-    'exclude' => true,
     'inputType' => 'select',
     'options_callback' => array('Reference\Tables\ReferenceTables', 'getReferenceTemplates'),
     'eval' => array('includeBlankOption' => true, 'chosen' => true, 'tl_class' => 'w50'),
