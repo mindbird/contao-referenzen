@@ -51,13 +51,9 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
         ),
         'label' => array(
             'fields' => array(
-                'reference'
+                'title'
             ),
-            'format' => '%s',
-            'label_callback' => array(
-                'Reference\Tables\ReferenceTables',
-                'generateLabel'
-            )
+            'format' => '%s'
         ),
         'global_operations' => array(
             'category' => array(

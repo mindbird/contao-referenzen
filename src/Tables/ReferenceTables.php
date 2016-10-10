@@ -4,7 +4,6 @@ namespace Reference;
 
 use Contao\Backend;
 use Contao\DataContainer;
-use Contao\Image;
 use Reference\Models\ReferenceArchiveModel;
 use Reference\Models\ReferenceCategoryModel;
 
@@ -15,9 +14,9 @@ class ReferenceTables extends Backend
         return $this->getTemplateGroup('reference_');
     }
 
-    public function listreference($row)
+    public function listReference($row)
     {
-        return '<div>' . $row['reference'] . '</div>';
+        return '<div>' . $row['title'] . '</div>';
     }
 
     public function onloadCallback(DataContainer $dc)
