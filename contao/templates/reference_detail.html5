@@ -11,5 +11,7 @@
 	<div class="teaser"><?= $this->teaser ?></div>
 
 	<div class="description"><?= $this->description ?></div>
+
+	<a href="javascript: history.back();">Zurück zur Übersicht</a>
 </div>
 <!-- indexer::stop -->

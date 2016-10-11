@@ -47,7 +47,7 @@ class ReferenceDetail extends Module {
 
 			$image = FilesModel::findByPk ( $reference->image );
             if ($image) {
-                \Controller::addImageToTemplate($this->Template, array(
+                \Controller::addImageToTemplate($template, array(
                     'singleSRC' => $image->path,
                     'size' => deserialize ( $this->imgSize ),
                     'alt' => $reference->title

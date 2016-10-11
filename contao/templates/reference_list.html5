@@ -5,11 +5,11 @@
 		</figure>
 	<?php } ?>
 
-	<h3><?= $this->reference ?></h3>
+	<h3><?= $this->title ?></h3>
 
 	<div class="teaser"><?= $this->teaser ?></div>
 
 	<?php if ($this->link): ?>
-		<a href="<?= $this->link ?>">Zur Reference</a>
+		<a href="<?= $this->link ?>">Zur Referenz</a>
 	<?php endif; ?>	
 </div>
