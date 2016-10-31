@@ -2,7 +2,7 @@
 
 <?php $this->block('content'); ?>
 	<?= $this->strFilter ?>
-	<div class="references">
+	<div class="references block">
 		<?= $this->references; ?>
 	</div>
 	<?= $this->pagination; ?>

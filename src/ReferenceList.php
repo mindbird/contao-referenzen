@@ -105,7 +105,7 @@ class ReferenceList extends Module
 
             // Add pagination menu
             $objPagination = new \Pagination ($total, $limit);
-            $this->Template->strPagination = $objPagination->generate();
+            $this->Template->pagination = $objPagination->generate();
         }
 
         // Order
