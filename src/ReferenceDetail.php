@@ -58,6 +58,7 @@ class ReferenceDetail extends Module {
 			$categories = deserialize ( $reference->category );
             $strCategory = '';
 			if (count ( $categories ) > 0) {
+			    print ("SELECT * FROM tl_reference_category WHERE id IN(" . implode ( ',', $categories ) . ")");
 				$referenceCategories = $db->prepare ( "SELECT * FROM tl_reference_category WHERE id IN(" . implode ( ',', $categories ) . ")" )->execute (  );
 				while ( $referenceCategories->next () ) {
 					$arrCategory [] = $referenceCategories->title;

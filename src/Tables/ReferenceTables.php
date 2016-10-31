@@ -70,5 +70,4 @@ class ReferenceTables extends Backend
 
         return $category;
     }
-
 }
