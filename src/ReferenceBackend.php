@@ -55,14 +55,14 @@ class ReferenceBackend extends Backend
                 $domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
 
                 $arrPids [] = $arrModule ['reference_archiv'];
-                $references = ReferenceModel::findByPids($arrPids, 0, 0, array(
-                    'order' => 'id ASC'
-                ));
-                while ($references->next()) {
-                    $arrReferences = $references->row();
-                    $arrPages [] = $domain . $this->generateFrontendUrl($objParent->row(),
-                            '/referenceID/' . $arrReferences ['id'], $objParent->language);
-                }
+            }
+            $references = ReferenceModel::findByPids($arrPids, 0, 0, array(
+                'order' => 'id ASC'
+            ));
+            while ($references->next()) {
+                $arrReferences = $references->row();
+                $arrPages [] = $domain . $this->generateFrontendUrl($objParent->row(),
+                        '/referenceID/' . $arrReferences ['id'], $objParent->language);
             }
         }
 
