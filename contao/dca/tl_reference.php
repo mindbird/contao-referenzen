@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * Load tl_content language file
+ */
+System::loadLanguageFile('tl_content');
+
+/**
  * Table tl_reference
  */
 $GLOBALS['TL_DCA']['tl_reference'] = array(
@@ -9,6 +14,7 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
     'config' => array(
         'dataContainer' => 'Table',
         'ptable' => 'tl_reference_archive',
+        'ctable' => array('tl_content'),
         'switchToEdit' => true,
         'enableVersioning' => true,
         'sql' => array(
@@ -62,10 +68,17 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
             )
         ),
         'operations' => array(
-            'edit' => array(
+            'edit' => array
+            (
                 'label' => &$GLOBALS['TL_LANG']['tl_reference']['edit'],
-                'href' => 'act=edit',
+                'href' => 'table=tl_content',
                 'icon' => 'edit.gif'
+            ),
+            'editheader' => array
+            (
+                'label' => &$GLOBALS['TL_LANG']['tl_reference']['editmeta'],
+                'href' => 'act=edit',
+                'icon' => 'header.gif'
             ),
             'copy' => array(
                 'label' => &$GLOBALS['TL_LANG']['tl_reference']['copy'],
@@ -77,11 +90,6 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
                 'href' => 'act=delete',
                 'icon' => 'delete.gif',
                 'attributes' => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
-            ),
-            'show' => array(
-                'label' => &$GLOBALS['TL_LANG']['tl_reference']['show'],
-                'href' => 'act=show',
-                'icon' => 'show.gif'
             )
         )
     ),

@@ -5,7 +5,8 @@ $GLOBALS ['BE_MOD'] ['content'] ['reference'] = array(
     'tables' => array(
         'tl_reference_archive',
         'tl_reference',
-        'tl_reference_category'
+        'tl_reference_category',
+        'tl_content'
     ),
     'icon' => 'system/modules/referenzen/assets/images/icon.png'
 );

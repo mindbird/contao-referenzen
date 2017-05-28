@@ -2,13 +2,15 @@
 
 namespace Reference;
 
-use Contao\Database;
-use Reference\Models\ReferenceModel;
 use Contao\BackendTemplate;
+use Contao\ContentModel;
+use Contao\Controller;
+use Contao\Database;
 use Contao\FilesModel;
 use Contao\FrontendTemplate;
 use Contao\Input;
 use Contao\Module;
+use Reference\Models\ReferenceModel;
 
 class ReferenceDetail extends Module {
 	
@@ -21,15 +23,15 @@ class ReferenceDetail extends Module {
 	
 	public function generate() {
 		if (TL_MODE == 'BE') {
-			$objTemplate = new BackendTemplate ( 'be_wildcard' );
+			$template = new BackendTemplate ( 'be_wildcard' );
 				
-			$objTemplate->wildcard = '### REFERENZEN DETAILS ###';
-			$objTemplate->title = $this->headline;
-			$objTemplate->id = $this->id;
-			$objTemplate->link = $this->name;
-			$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
+			$template->wildcard = '### REFERENZEN DETAILS ###';
+			$template->title = $this->headline;
+			$template->id = $this->id;
+			$template->link = $this->name;
+			$template->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
 				
-			return $objTemplate->parse ();
+			return $template->parse ();
 		}
 	
 		return parent::generate ();
@@ -47,7 +49,7 @@ class ReferenceDetail extends Module {
 
 			$image = FilesModel::findByPk ( $reference->image );
             if ($image) {
-                \Controller::addImageToTemplate($template, array(
+                Controller::addImageToTemplate($template, array(
                     'singleSRC' => $image->path,
                     'size' => deserialize ( $this->imgSize ),
                     'alt' => $reference->title
@@ -56,18 +58,30 @@ class ReferenceDetail extends Module {
 
 			// Get Categories
 			$categories = deserialize ( $reference->category );
-            $strCategory = '';
+            $category = '';
 			if (count ( $categories ) > 0) {
 				$referenceCategories = $db->prepare ( "SELECT * FROM tl_reference_category WHERE id IN(" . implode ( ',', $categories ) . ")" )->execute (  );
 				while ( $referenceCategories->next () ) {
 					$arrCategory [] = $referenceCategories->title;
 				}
-				$strCategory = implode ( ', ', $arrCategory );
+				$category = implode ( ', ', $arrCategory );
 			}
+
+            $content = '';
+            $contentElement = ContentModel::findPublishedByPidAndTable($referenceId, 'tl_reference');
+            if ($contentElement !== null)
+            {
+                while ($contentElement->next())
+                {
+                    $content .= $this->getContentElement($contentElement->current());
+                }
+            }
+
+            $template->content = $content;
 			$template->title = $reference->title;
 			$template->teaser = $reference->teaser;
             $template->description = $reference->description;
-            $template->category = $strCategory;
+            $template->category = $category;
 			
 			$this->Template->referenceHtml = $template->parse ();
 		}
