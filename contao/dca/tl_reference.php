@@ -136,8 +136,7 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
             'search' => true,
             'inputType' => 'textarea',
             'eval' => array(
-                'rte' => 'tinyMCE',
-                'mandatory' => true,
+                'rte' => 'tinyMCE'
             ),
             'sql' => "text NULL"
         ),
