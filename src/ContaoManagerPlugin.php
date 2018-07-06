@@ -1,6 +1,6 @@
 <?php
 
-namespace Mindbird\Contao\Person;
+namespace Mindbird\Contao\Reference;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
