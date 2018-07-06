@@ -4,14 +4,14 @@ namespace Mindbird\Contao\Reference\Tables;
 
 use Contao\Backend;
 use Contao\DataContainer;
-use Reference\Models\ReferenceArchiveModel;
-use Reference\Models\ReferenceCategoryModel;
+use Mindbird\Contao\Reference\Models\ReferenceArchive;
+use Mindbird\Contao\Reference\Models\ReferenceCategory;
 
-class ReferenceTables extends Backend
+class Reference extends Backend
 {
     public function getReferenceTemplates()
     {
-        return $this->getTemplateGroup('reference_');
+        return static::getTemplateGroup('reference_');
     }
 
     public function listReference($row)
@@ -21,7 +21,7 @@ class ReferenceTables extends Backend
 
     public function onloadCallback(DataContainer $dc)
     {
-        $objreferenceArchive = ReferenceArchiveModel::findByPk($dc->id);
+        $objreferenceArchive = ReferenceArchive::findByPk($dc->id);
 
         switch ($objreferenceArchive->sort_order) {
             case 2:
@@ -41,9 +41,9 @@ class ReferenceTables extends Backend
         }
     }
 
-    public function optionsCallbackCategory($dc)
+    public function optionsCallbackCategory($dc): array
     {
-        $categories = ReferenceCategoryModel::findBy ( 'pid', $dc->activeRecord->pid, array (
+        $categories = ReferenceCategory::findBy ( 'pid', $dc->activeRecord->pid, array (
             'order' => 'title ASC'
         ) );
         $category = array();
@@ -56,9 +56,9 @@ class ReferenceTables extends Backend
         return $category;
     }
 
-    public function optionsCallbackReferenceCategory($dc)
+    public function optionsCallbackReferenceCategory($dc): array
     {
-        $categories = ReferenceCategoryModel::findBy ( 'pid', $dc->activeRecord->reference_archiv, array (
+        $categories = ReferenceCategory::findBy ( 'pid', $dc->activeRecord->reference_archiv, array (
             'order' => 'title ASC'
         ) );
         $category = array();

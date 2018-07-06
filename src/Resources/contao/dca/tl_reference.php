@@ -26,7 +26,7 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
         ),
         'onload_callback' => array(
             array(
-                'Reference\Tables\ReferenceTables',
+                'Mindbird\Contao\Reference\Tables\Reference',
                 'onloadCallback'
             )
         )
@@ -43,7 +43,7 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
                 'title'
             ),
             'child_record_callback' => array(
-                'Reference\Tables\ReferenceTables',
+                'Mindbird\Contao\Reference\Tables\Reference',
                 'listReference'
             ),
             'panelLayout' => 'sort,filter,search,limit'
@@ -227,7 +227,7 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
                 'load' => 'eagerly'
             ),
             'options_callback' => array(
-                'Reference\Tables\ReferenceTables',
+                'Mindbird\Contao\Reference\Tables\Reference',
                 'optionsCallbackCategory'
             )
         )
