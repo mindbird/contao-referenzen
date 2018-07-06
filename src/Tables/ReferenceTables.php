@@ -1,6 +1,6 @@
 <?php
 
-namespace Reference\Tables;
+namespace Mindbird\Contao\Reference\Tables;
 
 use Contao\Backend;
 use Contao\DataContainer;

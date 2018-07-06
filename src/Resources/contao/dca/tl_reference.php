@@ -95,7 +95,7 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
     ),
     // Palettes
     'palettes' => array(
-        'default' => '{reference_legend},title,teaser,description,image;{category_legend},category;'
+        'default' => '{reference_legend},title,teaser,description,image;{category_legend},category;{gallery_legend},multiSRC,size,perRow,fullsize;'
     ),
     // Fields
     'fields' => array(
@@ -152,6 +152,64 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
                 'extensions' => 'jpg, jpeg, png, gif, svg'
             ),
             'sql' => "binary(16) NULL"
+        ),
+        'multiSRC' => array
+        (
+            'label' => &$GLOBALS['TL_LANG']['tl_reference']['multiSRC'],
+            'exclude' => true,
+            'inputType' => 'fileTree',
+            'eval' => array(
+                'multiple' => true,
+                'fieldType' => 'checkbox',
+                'orderField' => 'orderSRC',
+                'files' => true,
+                'mandatory' => true,
+                'isGallery' => true,
+                'extensions' => \Contao\Config::get('validImageTypes')
+
+            ),
+            'sql' => "blob NULL"
+        ),
+        'orderSRC' => array
+        (
+            'label' => &$GLOBALS['TL_LANG']['MSC']['sortOrder'],
+            'sql' => "blob NULL"
+        ),
+        'size' => array
+        (
+            'label' => &$GLOBALS['TL_LANG']['tl_reference']['size'],
+            'exclude' => true,
+            'inputType' => 'imageSize',
+            'reference' => &$GLOBALS['TL_LANG']['MSC'],
+            'eval' => array(
+                'rgxp' => 'natural',
+                'includeBlankOption' => true,
+                'nospace' => true,
+                'helpwizard' => true,
+                'tl_class' => 'w50'
+            ),
+            'options_callback' => function () {
+                return \Contao\System::getContainer()->get('contao.image.image_sizes')->getOptionsForUser(BackendUser::getInstance());
+            },
+            'sql' => "varchar(64) NOT NULL default ''"
+        ),
+        'perRow' => array
+        (
+            'label' => &$GLOBALS['TL_LANG']['tl_reference']['perRow'],
+            'default' => 4,
+            'exclude' => true,
+            'inputType' => 'select',
+            'options' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+            'eval' => array('tl_class' => 'w50'),
+            'sql' => "smallint(5) unsigned NOT NULL default '0'"
+        ),
+        'fullsize' => array
+        (
+            'label' => &$GLOBALS['TL_LANG']['tl_reference']['fullsize'],
+            'exclude' => true,
+            'inputType' => 'checkbox',
+            'eval' => array('tl_class' => 'w50 m12'),
+            'sql' => "char(1) NOT NULL default ''"
         ),
         'category' => array(
             'label' => &$GLOBALS['TL_LANG']['tl_reference']['category'],

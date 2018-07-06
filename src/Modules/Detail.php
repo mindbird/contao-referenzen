@@ -1,6 +1,6 @@
 <?php
 
-namespace Reference;
+namespace Mindbird\Contao\Reference\Modules;
 
 use Contao\BackendTemplate;
 use Contao\ContentModel;
@@ -10,9 +10,9 @@ use Contao\FilesModel;
 use Contao\FrontendTemplate;
 use Contao\Input;
 use Contao\Module;
-use Reference\Models\ReferenceModel;
+use Mindbird\Contao\Reference\Models\Reference;
 
-class ReferenceDetail extends Module {
+class Detail extends Module {
 	
 	/**
 	 * Template
@@ -22,7 +22,7 @@ class ReferenceDetail extends Module {
 	protected $strTemplate = 'mod_reference_detail';
 	
 	public function generate() {
-		if (TL_MODE == 'BE') {
+		if (TL_MODE === 'BE') {
 			$template = new BackendTemplate ( 'be_wildcard' );
 				
 			$template->wildcard = '### REFERENZEN DETAILS ###';
@@ -40,7 +40,7 @@ class ReferenceDetail extends Module {
 	protected function compile() {
         $db = Database::getInstance();
 		$referenceId = Input::get ( 'referenceId' );
-		$reference = ReferenceModel::findByPk ( $referenceId );
+		$reference = Reference::findByPk ( $referenceId );
 		if ($reference) {
 			global $objPage;
 			$objPage->pageTitle = $reference->title;

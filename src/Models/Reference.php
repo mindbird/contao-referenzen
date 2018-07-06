@@ -1,10 +1,10 @@
 <?php
 
-namespace Reference\Models;
+namespace Mindbird\Contao\Reference\Models;
 
 use Contao\Model;
 
-class ReferenceModel extends Model {
+class Reference extends Model {
 	protected static $strTable = 'tl_reference';
 	public static function findItems($intPid, $strReferenceName = '', $intCategory = 0, $intOffset = 0, $intLimit = 0, $strOrder = 'title ASC') {
 		$arrOptions = array ();

@@ -1,10 +1,10 @@
 <?php
 
-namespace Reference\Models;
+namespace Mindbird\Contao\Reference\Models;
 
 use Contao\Model;
 
-class ReferenceCategoryModel extends Model {
+class ReferenceCategory extends Model {
 
 	protected static $strTable = 'tl_reference_category';
 
