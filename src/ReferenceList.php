@@ -64,12 +64,16 @@ class ReferenceList extends Module
                 'order' => 'title ASC'
             ));
             $strOptions = '<option value="0">' . $GLOBALS ['TL_LANG'] ['tl_reference_category'] ['category'] [0] . '</option>';
+            $arrOptions = array();
+
             if ($objCategories) {
                 while ($objCategories->next()) {
                     $strOptions .= '<option value="' . $objCategories->id . '"' . ($intFilterCategory != $objCategories->id ? '' : ' selected') . '>' . $objCategories->title . '</option>';
+                    $arrOptions[] = ['title'=> $objCategories->title, 'id'=>$objCategories->id,'active'=>($intFilterCategory != $objCategories->id)?false:true ];
                 }
             }
             $objTemplateFilter->strCategoryOptions = $strOptions;
+            $objTemplateFilter->arrCategories = $arrOptions;
             $this->Template->strFilter = $objTemplateFilter->parse();
         } elseif($this->reference_category) {
             $strSearch = '';
@@ -143,6 +147,10 @@ class ReferenceList extends Module
     {
         $strHTML = '';
         while ($references->next()) {
+            //zugehörige Kategorien holen
+            $arrCategorieIds = unserialize($references->category);
+            $arrCategorieData= $this->getReferenceCategoriesAsArray($arrCategorieIds);
+            $strCategorieClasses = $this->generateCategorieClassString($arrCategorieData);
             $template = new FrontendTemplate ($this->strTemplateReferenceList);
 
             $image = FilesModel::findByPk($references->image);
@@ -157,6 +165,8 @@ class ReferenceList extends Module
             $template->title = $references->title;
             $template->teaser = $references->teaser;
             $template->description = $references->description;
+            $template->categories = $arrCategorieData;
+            $template->categorie_classes = $strCategorieClasses;
 
             if ($page) {
                 $template->link = $this->generateFrontendUrl($page->row(), '/referenceId/' . $references->id);
@@ -165,5 +175,34 @@ class ReferenceList extends Module
         }
 
         return $strHTML;
+    }
+
+    /**
+     * @param array $idArray
+     */
+    protected function getReferenceCategoriesAsArray($idArray=array()) {
+
+        $returnArr = [];
+        $objCategories = ReferenceCategoryModel::findMultipleByIds($idArray);
+
+        if($objCategories != null)
+            while($objCategories->next()) {
+                $returnArr[$objCategories->id] = $objCategories->title;
+            }
+
+        // TODO: hier gehts weiter
+        return $returnArr;
+    }
+
+    protected function generateCategorieClassString($catArray=array()) {
+        if(!is_array($catArray) || count($catArray) < 1) return '';
+
+        $classArray= [];
+
+        foreach($catArray as $key => $title) {
+           $classArray[] = \StringUtil::generateAlias($title);
+        }
+
+        return implode(" ",$classArray);
     }
 }
