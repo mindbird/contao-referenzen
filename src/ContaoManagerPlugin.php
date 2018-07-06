@@ -16,7 +16,7 @@ class ContaoManagerPlugin implements BundlePluginInterface
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create(ReferenceBundle::class)->setLoadAfter([ContaoCoreBundle::class])->setReplace(['person'])
+            BundleConfig::create(ReferenceBundle::class)->setLoadAfter([ContaoCoreBundle::class])
         ];
     }
 }
