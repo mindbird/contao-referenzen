@@ -95,7 +95,7 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
     ),
     // Palettes
     'palettes' => array(
-        'default' => '{reference_legend},title,teaser,description,image;{category_legend},category;{gallery_legend},multiSRC,size,perRow,fullsize;'
+        'default' => '{reference_legend},title,teaser,description,image;{category_legend},category;{gallery_legend},multiSRC,size,perRow;'
     ),
     // Fields
     'fields' => array(
@@ -117,7 +117,8 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
             'inputType' => 'text',
             'eval' => array(
                 'mandatory' => true,
-                'maxlength' => 255
+                'maxlength' => 255,
+                'tl_class' => 'w50'
             ),
             'sql' => "varchar(255) NOT NULL default ''"
         ),
@@ -127,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
             'inputType' => 'text',
             'eval' => array(
                 'maxlength' => 255,
-                'mandatory' => true,
+                'tl_class' => 'clr'
             ),
             'sql' => "varchar(255) NOT NULL default ''"
         ),
@@ -136,7 +137,8 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
             'search' => true,
             'inputType' => 'textarea',
             'eval' => array(
-                'rte' => 'tinyMCE'
+                'rte' => 'tinyMCE',
+                'tl_class' => 'clr'
             ),
             'sql' => "text NULL"
         ),
@@ -163,7 +165,6 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
                 'fieldType' => 'checkbox',
                 'orderField' => 'orderSRC',
                 'files' => true,
-                'mandatory' => true,
                 'isGallery' => true,
                 'extensions' => \Contao\Config::get('validImageTypes')
 
@@ -202,14 +203,6 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
             'options' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
             'eval' => array('tl_class' => 'w50'),
             'sql' => "smallint(5) unsigned NOT NULL default '0'"
-        ),
-        'fullsize' => array
-        (
-            'label' => &$GLOBALS['TL_LANG']['tl_reference']['fullsize'],
-            'exclude' => true,
-            'inputType' => 'checkbox',
-            'eval' => array('tl_class' => 'w50 m12'),
-            'sql' => "char(1) NOT NULL default ''"
         ),
         'category' => array(
             'label' => &$GLOBALS['TL_LANG']['tl_reference']['category'],

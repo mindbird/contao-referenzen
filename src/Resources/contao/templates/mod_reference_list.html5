@@ -1,9 +1,7 @@
 <?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
-	<?= $this->strFilter ?>
-	<div class="references block">
+	<div class="references block" data-isotope='{ "itemSelector": ".reference", "layoutMode": "fitRows" }'>
 		<?= $this->references; ?>
 	</div>
-	<?= $this->pagination; ?>
 <?php $this->endblock(); ?>

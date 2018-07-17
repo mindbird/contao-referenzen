@@ -8,6 +8,9 @@ $GLOBALS['TL_LANG']['tl_reference']['category'] = array('Kategorie', 'Bitte wäh
 $GLOBALS['TL_LANG']['tl_reference']['teaser'] = array('Teaser', '');
 $GLOBALS['TL_LANG']['tl_reference']['description'] = array('Beschreibung', '');
 $GLOBALS['TL_LANG']['tl_reference']['image'] = array('Bild', '');
+$GLOBALS['TL_LANG']['tl_reference']['multiSRC'] = array('Bilder', '');
+$GLOBALS['TL_LANG']['tl_reference']['size'] = array('Größe', '');
+$GLOBALS['TL_LANG']['tl_reference']['perRow'] = array('Bilder pro Reihe', '');
 
 
 /**
@@ -15,6 +18,7 @@ $GLOBALS['TL_LANG']['tl_reference']['image'] = array('Bild', '');
  */
 $GLOBALS['TL_LANG']['tl_reference']['reference_legend'] = 'Referenz';
 $GLOBALS['TL_LANG']['tl_reference']['category_legend'] = 'Kategorie';
+$GLOBALS['TL_LANG']['tl_reference']['gallery_legend'] = 'Galerie';
 
 /**
  * Buttons

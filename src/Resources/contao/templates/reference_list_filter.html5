@@ -1,7 +1,0 @@
-<div class="filter">
-	<form method="GET" name="filterCategory">
-		<select class="category" name="category" onchange="window.location.href =  '<?= $this->strLink; ?>'.replace('ID',this.value);">
-			<?= $this->strCategoryOptions; ?>
-		</select>
-	</form>
-</div>

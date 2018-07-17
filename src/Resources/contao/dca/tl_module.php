@@ -9,7 +9,7 @@ $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['reference_archiv'] = array(
     'foreignKey' => 'tl_reference_archive.title',
     'eval' => array(
         'mandatory' => true,
-        'tl_class' => 'w50',
+        'tl_class' => 'clr',
         'submitOnChange' => true
     ),
     'sql' => "int(10) unsigned NOT NULL default '0'"
@@ -19,11 +19,11 @@ $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['reference_category'] = array(
     'label' => &$GLOBALS ['TL_LANG'] ['tl_module'] ['reference_category'],
     'inputType' => 'select',
     'options_callback' => array(
-        'Reference\Tables\ReferenceTables',
+        'Mindbird\Contao\Reference\Tables\Reference',
         'optionsCallbackReferenceCategory'
     ),
     'eval' => array(
-        'tl_class' => 'w50',
+        'tl_class' => 'clr',
         'includeBlankOption' => true
     ),
     'sql' => "varchar(10) NOT NULL default ''"
@@ -53,7 +53,7 @@ $GLOBALS ['TL_DCA'] ['tl_module'] ['fields']['referenceTpl'] = array
 (
     'label' => &$GLOBALS['TL_LANG']['tl_module']['referenceTpl'],
     'inputType' => 'select',
-    'options_callback' => array('Reference\Tables\ReferenceTables', 'getReferenceTemplates'),
+    'options_callback' => array('Mindbird\Contao\Reference\Tables\Reference', 'getReferenceTemplates'),
     'eval' => array('includeBlankOption' => true, 'chosen' => true, 'tl_class' => 'w50'),
     'sql' => "varchar(64) NOT NULL default ''"
 );

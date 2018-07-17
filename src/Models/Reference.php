@@ -6,31 +6,18 @@ use Contao\Model;
 
 class Reference extends Model {
 	protected static $strTable = 'tl_reference';
-	public static function findItems($intPid, $strReferenceName = '', $intCategory = 0, $intOffset = 0, $intLimit = 0, $strOrder = 'title ASC') {
-		$arrOptions = array ();
-		$arrOptions ['column'] [] = 'pid = ?';
-		$arrOptions ['value'] [] = $intPid;
-		
-		if ($strReferenceName != '') {
-			$arrOptions ['column'] [] = 'reference LIKE ?';
-			$arrOptions ['value'] [] = $strReferenceName . '%';
+	public static function findItems($intPid, $categoryId = 0, $strOrder = 'title ASC') {
+		$options = array ();
+		$options ['column'] [] = 'pid = ?';
+		$options ['value'] [] = $intPid;
+
+		if ($categoryId > 0) {
+			$options ['column'] [] = 'category LIKE ?';
+			$options ['value'] [] = '%"' . $categoryId . '"%';
 		}
+
+		$options ['order'] = $strOrder;
 		
-		if ($intCategory > 0) {
-			$arrOptions ['column'] [] = 'category LIKE ?';
-			$arrOptions ['value'] [] = '%"' . $intCategory . '"%';
-		}
-		
-		if ($intOffset > 0) {
-			$arrOptions ['offset'] = $intOffset;
-		}
-		
-		if ($intLimit > 0) {
-			$arrOptions ['limit'] = $intLimit;
-		}
-		
-		$arrOptions ['order'] = $strOrder;
-		
-		return static::find ( $arrOptions );
+		return static::find ( $options );
 	}
 }

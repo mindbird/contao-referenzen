@@ -8,7 +8,7 @@ $GLOBALS ['BE_MOD'] ['content'] ['reference'] = array(
         'tl_reference_category',
         'tl_content'
     ),
-    'icon' => 'system/modules/referenzen/assets/images/icon.png'
+    'icon' => 'bundles/referenzen/img/icon.png'
 );
 
 /** Frontend */
@@ -24,6 +24,6 @@ $GLOBALS ['TL_HOOKS'] ['getSearchablePages'] [] = array(
 );
 
 /** Models */
-$GLOBALS['TL_MODELS']['tl_reference'] = 'Reference\Models\ReferenceModel';
-$GLOBALS['TL_MODELS']['tl_reference_archive'] = 'Reference\Models\ReferenceArchiveModel';
-$GLOBALS['TL_MODELS']['tl_reference_category'] = 'Reference\Models\ReferenceCategoryModel';
+$GLOBALS['TL_MODELS']['tl_reference'] = 'Mindbird\Contao\Reference\Models\Reference';
+$GLOBALS['TL_MODELS']['tl_reference_archive'] = 'Mindbird\Contao\Reference\Models\ReferenceArchive';
+$GLOBALS['TL_MODELS']['tl_reference_category'] = 'Mindbird\Contao\Reference\Models\ReferenceCategory';
