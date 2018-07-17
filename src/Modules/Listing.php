@@ -3,7 +3,6 @@
 namespace Mindbird\Contao\Reference\Modules;
 
 use Contao\BackendTemplate;
-use Contao\Environment;
 use Contao\FilesModel;
 use Contao\FrontendTemplate;
 use Contao\Input;
@@ -11,7 +10,6 @@ use Contao\Model;
 use Contao\Model\Collection;
 use Contao\Module;
 use Contao\PageModel;
-use Contao\System;
 use Mindbird\Contao\Reference\Models\Reference;
 use Mindbird\Contao\Reference\Models\ReferenceArchive;
 use Mindbird\Contao\Reference\Models\ReferenceCategory;
@@ -27,6 +25,8 @@ class Listing extends Module
     protected $strTemplate = 'mod_reference_list';
 
     protected $strTemplateReferenceList = 'reference_list';
+
+    protected $strTemplateFilter = 'reference_filter_button';
 
     public function generate(): string
     {
@@ -45,7 +45,7 @@ class Listing extends Module
             $this->strTemplateReferenceList = $this->referenceTpl;
         }
 
-        $GLOBALS['TL_BODY'][] = '<script src="bundles/referenzen/js/script.min.js"></script>';
+        $GLOBALS['TL_BODY'][] = '<script src="bundles/reference/js/script.min.js"></script>';
 
         return parent::generate();
     }
@@ -59,10 +59,12 @@ class Listing extends Module
         // Check if filter should be displayed
         if (!$this->reference_filter_disabled && !$this->reference_category) {
             $filterCategory = Input::get('filterCategory');
-            $this->generateFilter($filterCategory);
         } elseif ($this->reference_category) {
             $filterCategory = $this->reference_category;
+        } else {
+            $this->Template->filter = $this->generateFilter();
         }
+        $this->Template->filter = $this->generateFilter();
 
         $strOrder = $this->reference_random ? 'RAND()' : 'title ASC';
         /** @var ReferenceArchive $referenceArchive */
@@ -103,21 +105,42 @@ class Listing extends Module
             $template->title = $references->title;
             $template->teaser = $references->teaser;
             $template->description = $references->description;
-            $template->categories = $references->categories;
+            $categories = unserialize($references->category);
+            $categoryTmp = [];
+            if ($categories && count($categories) > 0) {
+                foreach ($categories as $id) {
+                    $categoryTmp[] = 'cat-' . $id;
+                }
+            }
+            $template->categories = $categoryTmp;
+            $template->cssCategories = implode(' ', $categoryTmp);
 
             if ($page) {
-                $urlGenerator = System::getContainer()->get('contao.routing.url_generator');
-                $template->link = $urlGenerator->generate(
-                    $page->id . '/{referenceId}',
-                    [
-                        'referenceId' => $references->id,
-                        'auto_item' => 'referenceId'
-                    ]
-                );
+                $template->link = $page->getFrontendUrl('/' . $references->id);
             }
             $strHTML .= $template->parse();
         }
 
         return $strHTML;
+    }
+
+    protected function generateFilter()
+    {
+        $categories = ReferenceCategory::findBy('pid', $this->reference_archiv);
+        $filterCategories = [];
+        if ($categories !== null) {
+            while ($categories->next()) {
+                $filterCategories[$categories->id] = $categories->title;
+            }
+        }
+
+        $this->strTemplateFilter = 'reference_filter_button';
+        if ($this->referenceFilterTpl !== '') {
+            $this->strTemplateFilter = $this->referenceFilterTpl;
+        }
+        $template = new FrontendTemplate($this->strTemplateFilter);
+        $template->categories = $filterCategories;
+
+        return $template->parse();
     }
 }

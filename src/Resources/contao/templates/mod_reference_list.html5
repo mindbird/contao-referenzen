@@ -1,7 +1,18 @@
 <?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
+	<div class="filter">
+		<?= $this->filter; ?>
+	</div>
 	<div class="references block" data-isotope='{ "itemSelector": ".reference", "layoutMode": "fitRows" }'>
 		<?= $this->references; ?>
 	</div>
+	<script type="text/javascript">
+		$(function () {
+			$('.mod_reference_list .references').isotope({
+				itemSelector: ".reference",
+				layoutMode: "fitRows"
+			});
+        });
+	</script>
 <?php $this->endblock(); ?>

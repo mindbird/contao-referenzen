@@ -1,0 +1,12 @@
+<button data-filter="*">Alle Kategorien</button>
+<?php foreach($this->categories as $id => $name) : ?>
+    <button data-filter=".cat-<?= $id ?>"><?= $name ?></button>
+<?php endforeach; ?>
+
+<script type="text/javascript">
+    $(window).load(function () {
+        $('.mod_reference_list .filter button').on( 'click', function() {
+            $('.mod_reference_list .references').isotope({ filter: $(this).attr('data-filter') });
+        });
+    });
+</script>

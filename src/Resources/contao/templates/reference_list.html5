@@ -1,4 +1,4 @@
-<div class="reference block">
+<div class="reference block <?= $this->cssCategories; ?>">
 	<?php if ($this->picture) { ?>
 		<figure>
 			<?= $this->insert('picture_default', $this->picture) ?>

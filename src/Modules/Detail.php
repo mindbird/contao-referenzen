@@ -33,13 +33,13 @@ class Detail extends Module {
 				
 			return $template->parse ();
 		}
-	
+
 		return parent::generate ();
 	}
 	
 	protected function compile() {
         $db = Database::getInstance();
-		$referenceId = Input::get ( 'referenceId' );
+		$referenceId = Input::get('auto_item');
 		$reference = Reference::findByPk ( $referenceId );
 		if ($reference) {
 			global $objPage;

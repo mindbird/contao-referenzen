@@ -12,8 +12,8 @@ $GLOBALS ['BE_MOD'] ['content'] ['reference'] = array(
 
 /** Frontend */
 array_insert($GLOBALS ['FE_MOD'] ['reference'], 1, array(
-    'reference_list' => 'Mindbird\Contao\Reference\Modules\ReferenceList',
-    'reference_detail' => 'Mindbird\Contao\Reference\Modules\ReferenceDetail'
+    'reference_list' => 'Mindbird\Contao\Reference\Modules\Listing',
+    'reference_detail' => 'Mindbird\Contao\Reference\Modules\Detail'
 ));
 
 /** Hooks */

@@ -14,6 +14,11 @@ class Reference extends Backend
         return static::getTemplateGroup('reference_');
     }
 
+    public function getReferenceFilterTemplates()
+    {
+        return static::getTemplateGroup('reference_filter_');
+    }
+
     public function listReference($row)
     {
         return '<div>' . $row['title'] . '</div>';
