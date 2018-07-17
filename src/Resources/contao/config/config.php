@@ -7,14 +7,13 @@ $GLOBALS ['BE_MOD'] ['content'] ['reference'] = array(
         'tl_reference',
         'tl_reference_category',
         'tl_content'
-    ),
-    'icon' => 'bundles/referenzen/img/icon.png'
+    )
 );
 
 /** Frontend */
 array_insert($GLOBALS ['FE_MOD'] ['reference'], 1, array(
-    'reference_list' => 'Reference\ReferenceList',
-    'reference_detail' => 'Reference\ReferenceDetail'
+    'reference_list' => 'Mindbird\Contao\Reference\Modules\ReferenceList',
+    'reference_detail' => 'Mindbird\Contao\Reference\Modules\ReferenceDetail'
 ));
 
 /** Hooks */

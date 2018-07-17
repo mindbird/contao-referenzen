@@ -1,5 +1,5 @@
 <?php
-$GLOBALS ['TL_DCA'] ['tl_module'] ['palettes'] ['reference_list'] = '{title_legend},name,headline,type;{archiv_legend},reference_archiv,reference_category,jumpTo,reference_random,reference_filter_disabled,numberOfItems,perPage,imgSize,referenceTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS ['TL_DCA'] ['tl_module'] ['palettes'] ['reference_list'] = '{title_legend},name,headline,type;{archiv_legend},reference_archiv,reference_category,jumpTo,reference_random,reference_filter_disabled,imgSize,referenceTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['numberOfItems'] ['eval'] ['mandatory'] = false;
 $GLOBALS ['TL_DCA'] ['tl_module'] ['fields'] ['reference_archiv'] = array(
