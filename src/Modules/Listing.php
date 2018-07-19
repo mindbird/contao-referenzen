@@ -117,10 +117,10 @@ class Listing extends Module
             $categories = unserialize($references->category);
             $categoryCss = [];
             $categoryTmp = [];
-            if ($this->categories && count($this->categories) > 0) {
-                foreach ($this->categories as $id => $name) {
+            if ($categories && count($categories) > 0) {
+                foreach ($categories as $id) {
                     $categoryCss[] = 'cat-' . $id;
-                    $categoryTmp[$id] = $name;
+                    $categoryTmp[$id] = $this->categories[$id];
                 }
             }
             $template->categories = $categoryTmp;

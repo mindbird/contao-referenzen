@@ -11,5 +11,5 @@
 
 	<?php if ($this->link): ?>
 		<a href="<?= $this->link ?>">Zur Referenz</a>
-	<?php endif; ?>	
+	<?php endif; ?>
 </div>
