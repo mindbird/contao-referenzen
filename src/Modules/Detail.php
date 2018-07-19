@@ -58,13 +58,12 @@ class Detail extends Module {
 
 			// Get Categories
 			$categories = deserialize ( $reference->category );
-            $category = '';
-			if (count ( $categories ) > 0) {
+            $categoryArr = [];
+			if (\count( $categories ) > 0) {
 				$referenceCategories = $db->prepare ( "SELECT * FROM tl_reference_category WHERE id IN(" . implode ( ',', $categories ) . ")" )->execute (  );
 				while ( $referenceCategories->next () ) {
-					$arrCategory [] = $referenceCategories->title;
+                    $categoryArr[$referenceCategories->id] = $referenceCategories->title;
 				}
-				$category = implode ( ', ', $arrCategory );
 			}
 
             $content = '';
@@ -78,10 +77,8 @@ class Detail extends Module {
             }
 
             $template->content = $content;
-			$template->title = $reference->title;
-			$template->teaser = $reference->teaser;
-            $template->description = $reference->description;
-            $template->category = $category;
+			$template->reference = $reference;
+            $template->categories = $categoryArr;
 			
 			$this->Template->referenceHtml = $template->parse ();
 		}

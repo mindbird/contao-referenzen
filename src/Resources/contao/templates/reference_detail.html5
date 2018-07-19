@@ -1,6 +1,6 @@
 <!-- indexer::continue -->
 <div class="reference block">
-	<h2 class="name"><?= $this->title ?></h2>
+	<h2 class="name"><?= $this->reference->title ?></h2>
 
 	<?php if ($this->picture) { ?>
 	<figure>
@@ -8,9 +8,11 @@
 	</figure>
 	<?php } ?>
 
-	<div class="teaser"><?= $this->teaser ?></div>
+	<div class="teaser"><?= $this->reference->teaser ?></div>
 
-	<div class="description"><?= $this->description ?></div>
+	<div class="category"><?= implode(', ', $this->categories); ?></div>
+
+	<div class="description"><?= $this->reference->description ?></div>
 
 	<div class="content"><?= $this->content ?></div>
 
