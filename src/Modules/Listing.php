@@ -113,9 +113,7 @@ class Listing extends Module
                 ));
             }
 
-            $template->title = $references->title;
-            $template->teaser = $references->teaser;
-            $template->description = $references->description;
+            $template->reference = $references;
             $categories = unserialize($references->category);
             $categoryCss = [];
             $categoryTmp = [];

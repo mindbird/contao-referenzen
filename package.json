@@ -1,0 +1,27 @@
+{
+  "name": "contao-referenzen",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "isotope-layout": "^3.0.6"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify-es": "^1.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mindbird/contao-referenzen.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mindbird/contao-referenzen/issues"
+  },
+  "homepage": "https://github.com/mindbird/contao-referenzen#readme"
+}
