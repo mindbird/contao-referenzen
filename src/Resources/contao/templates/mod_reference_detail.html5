@@ -1,5 +1,23 @@
 <?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
-	<?= $this->referenceHtml; ?>
+<div class="reference block">
+	<h2 class="name"><?= $this->reference->title ?></h2>
+
+	<?php if ($this->picture) { ?>
+	<figure>
+		<?= $this->insert('picture_default', $this->picture) ?>
+	</figure>
+	<?php } ?>
+
+	<div class="teaser"><?= $this->reference->teaser ?></div>
+
+	<div class="category"><?= implode(', ', $this->categories); ?></div>
+
+	<div class="description"><?= $this->reference->description ?></div>
+
+	<div class="content"><?= $this->content ?></div>
+
+	<a href="javascript: history.back();">Zurück zur Übersicht</a>
+</div>
 <?php $this->endblock(); ?>

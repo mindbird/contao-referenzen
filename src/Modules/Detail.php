@@ -7,7 +7,6 @@ use Contao\ContentModel;
 use Contao\Controller;
 use Contao\Database;
 use Contao\FilesModel;
-use Contao\FrontendTemplate;
 use Contao\Input;
 use Contao\Module;
 use Mindbird\Contao\Reference\Models\Reference;
@@ -44,12 +43,10 @@ class Detail extends Module {
 		if ($reference) {
 			global $objPage;
 			$objPage->pageTitle = $reference->title;
-			
-			$template = new FrontendTemplate ( 'reference_detail' );
 
 			$image = FilesModel::findByPk ( $reference->image );
             if ($image) {
-                Controller::addImageToTemplate($template, array(
+                Controller::addImageToTemplate($this->Template, array(
                     'singleSRC' => $image->path,
                     'size' => deserialize ( $this->imgSize ),
                     'alt' => $reference->title
@@ -72,15 +69,13 @@ class Detail extends Module {
             {
                 while ($contentElement->next())
                 {
-                    $content .= $this->getContentElement($contentElement->current());
+                    $content .= static::getContentElement($contentElement->current());
                 }
             }
 
-            $template->content = $content;
-			$template->reference = $reference;
-            $template->categories = $categoryArr;
-			
-			$this->Template->referenceHtml = $template->parse ();
+            $this->Template->content = $content;
+			$this->Template->reference = $reference;
+            $this->Template->categories = $categoryArr;
 		}
 	}
 }
