@@ -28,6 +28,8 @@ class Listing extends Module
 
     protected $strTemplateFilter = 'reference_filter_button';
 
+    private $categories;
+
     public function generate(): string
     {
         if (TL_MODE === 'BE') {
@@ -46,6 +48,15 @@ class Listing extends Module
         }
 
         $GLOBALS['TL_BODY'][] = '<script src="bundles/reference/js/script.min.js"></script>';
+
+        $categories = ReferenceCategory::findBy('pid', $this->reference_archiv);
+        $this->categories = [];
+        if ($categories !== null) {
+            while ($categories->next()) {
+                $this->categories[$categories->id] = $categories->title;
+            }
+        }
+
 
         return parent::generate();
     }
@@ -106,14 +117,16 @@ class Listing extends Module
             $template->teaser = $references->teaser;
             $template->description = $references->description;
             $categories = unserialize($references->category);
+            $categoryCss = [];
             $categoryTmp = [];
             if ($categories && count($categories) > 0) {
-                foreach ($categories as $id) {
-                    $categoryTmp[] = 'cat-' . $id;
+                foreach ($categories as $category) {
+                    $categoryCss[] = 'cat-' . $category->id;
+                    $categoryTmp[$category->id] = $category->title;
                 }
             }
             $template->categories = $categoryTmp;
-            $template->cssCategories = implode(' ', $categoryTmp);
+            $template->cssCategories = implode(' ', $categoryCss);
 
             if ($page) {
                 $template->link = $page->getFrontendUrl('/' . $references->id);
@@ -126,11 +139,10 @@ class Listing extends Module
 
     protected function generateFilter()
     {
-        $categories = ReferenceCategory::findBy('pid', $this->reference_archiv);
         $filterCategories = [];
-        if ($categories !== null) {
-            while ($categories->next()) {
-                $filterCategories[$categories->id] = $categories->title;
+        if ($this->categories !== null) {
+            while ($this->categories->next()) {
+                $filterCategories[$this->categories->id] = $this->categories->title;
             }
         }
 
