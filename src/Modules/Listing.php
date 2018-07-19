@@ -138,9 +138,9 @@ class Listing extends Module
     protected function generateFilter()
     {
         $filterCategories = [];
-        if ($this->categories !== null) {
-            while ($this->categories->next()) {
-                $filterCategories[$this->categories->id] = $this->categories->title;
+        if (count($this->categories) > 0) {
+            foreach ($this->categories as $id => $name) {
+                $filterCategories[$id] = $name;
             }
         }
 

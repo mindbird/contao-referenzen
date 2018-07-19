@@ -5,9 +5,9 @@
 		</figure>
 	<?php } ?>
 
-	<h3><?= $this->title ?></h3>
+	<h3><?= $this->reference->title ?></h3>
 
-	<div class="teaser"><?= $this->teaser ?></div>
+	<div class="teaser"><?= $this->reference->teaser ?></div>
 
 	<?php if ($this->link): ?>
 		<a href="<?= $this->link ?>">Zur Referenz</a>
