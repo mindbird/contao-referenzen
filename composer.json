@@ -12,13 +12,15 @@
     }
   ],
   "require": {
-    "contao/core-bundle": "~4.0"
+    "php": "^5.6 || ^7.0",
+    "contao/core-bundle": "^4.4"
+  },
+  "conflict": {
+    "contao/core": "*",
+    "contao/manager-plugin": "<2.0 || >=3.0"
   },
   "require-dev": {
     "contao/manager-plugin": "^2.0"
-  },
-  "conflict": {
-    "contao/manager-plugin": "<2.0 || >=3.0"
   },
   "extra": {
     "contao-manager-plugin": "Mindbird\\Contao\\Reference\\ContaoManager\\Plugin"
