@@ -95,7 +95,7 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
     ),
     // Palettes
     'palettes' => array(
-        'default' => '{reference_legend},title,teaser,description,image;{category_legend},category;'
+        'default' => '{reference_legend},title,teaser,description,image;{category_legend},category;{extend_legend:hide},featured'
     ),
     // Fields
     'fields' => array(
@@ -172,6 +172,15 @@ $GLOBALS['TL_DCA']['tl_reference'] = array(
                 'Reference\Tables\ReferenceTables',
                 'optionsCallbackCategory'
             )
-        )
+        ),
+        'featured' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_reference']['featured'],
+            'exclude'                 => true,
+            'filter'                  => true,
+            'inputType'               => 'checkbox',
+            'eval'                    => array('tl_class'=>'w50'),
+            'sql'                     => "char(1) NOT NULL default ''"
+        ),
     )
 );
