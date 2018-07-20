@@ -60,12 +60,14 @@ class ReferenceList extends Module
 
             // Get Categories
             $this->loadLanguageFile('tl_reference_category');
-            $objCategories = ReferenceCategoryModel::findBy('pid', $this->reference_archiv, array(
+
+            $objCategories = ReferenceCategoryModel::findShowCategoriesByArchive( $this->reference_archiv, array(
                 'order' => 'title ASC'
             ));
-            $strOptions = '<option value="0">' . $GLOBALS ['TL_LANG'] ['tl_reference_category'] ['category'] [0] . '</option>';
+
             $arrOptions = array();
 
+            $strOptions = '<option value="0">' . $GLOBALS ['TL_LANG'] ['tl_reference_category'] ['category'] [0] . '</option>';
             if ($objCategories) {
                 while ($objCategories->next()) {
                     $strOptions .= '<option value="' . $objCategories->id . '"' . ($intFilterCategory != $objCategories->id ? '' : ' selected') . '>' . $objCategories->title . '</option>';
@@ -75,16 +77,20 @@ class ReferenceList extends Module
             $objTemplateFilter->strCategoryOptions = $strOptions;
             $objTemplateFilter->arrCategories = $arrOptions;
             $this->Template->strFilter = $objTemplateFilter->parse();
+
         } elseif($this->reference_category) {
             $strSearch = '';
             $intFilterCategory = $this->reference_category;
+        } elseif($this->check_page_referenz) {
+            $strSearch = '';
+            $intFilterCategory = $this->checkCategoryPageReference();
         } else {
             $strSearch = '';
             $intFilterCategory = 0;
         }
 
         // Get items to calculate total number of items
-        $references = ReferenceModel::findItems($this->reference_archiv, $strSearch, $intFilterCategory);
+        $references = ReferenceModel::findItems($this->reference_archiv, $strSearch, $intFilterCategory, $this->only_featured);
 
         // Pagination
         $limit = 0;
@@ -126,13 +132,15 @@ class ReferenceList extends Module
         }
 
 
-        $references = ReferenceModel::findItems($this->reference_archiv, $strSearch, $intFilterCategory, $offset, $limit,
-            $strOrder);
+        $references = ReferenceModel::findItems($this->reference_archiv, $strSearch, $intFilterCategory, $this->only_featured, $offset, $limit, $strOrder);
 
         if ($references) {
             $this->Template->references = $this->getReferences($references, $objPage);
+            $this->Template->no_references = false;
         } else {
-            $this->Template->references = 'Mit den ausgewählten Filterkriterien sind keine Einträge vorhanden.';
+            $this->Template->references = '';
+            $this->Template->no_references = $GLOBALS['TL_LANG']['tl_module']['no_references'];
+
         }
     }
 
@@ -204,5 +212,13 @@ class ReferenceList extends Module
         }
 
         return implode(" ",$classArray);
+    }
+
+    protected function checkCategoryPageReference(){
+        global $objPage;
+
+        $objCategory = ReferenceCategoryModel::findRelatedCategoryByPage($objPage->id);
+
+         return ($objCategory !== null)? $objCategory->id : 0;
     }
 }
