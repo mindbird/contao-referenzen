@@ -66,30 +66,48 @@ $GLOBALS ['TL_DCA'] ['tl_reference_category'] = array (
 		
 		// Palettes
 		'palettes' => array (
-				'default' => '{title_legend},title' 
+				'default' => '{title_legend},title;{filter_legend},filterPage;{extend_legend},show'
 		),
 		// Fields
 		'fields' => array (
-				'id' => array (
-						'sql' => "int(10) unsigned NOT NULL auto_increment" 
-				),
-				'pid' => array (
-						'sql' => "int(10) unsigned NOT NULL default '0'" 
-				),
-				'tstamp' => array (
-						'sql' => "int(10) unsigned NOT NULL default '0'" 
-				),
-				'title' => array (
-						'label' => &$GLOBALS ['TL_LANG'] ['tl_reference_category'] ['title'],
-						'exclude' => true,
-						'search' => true,
-						'inputType' => 'text',
-						'eval' => array (
-								'mandatory' => true,
-								'maxlength' => 255 
-						),
-						'sql' => "varchar(255) NOT NULL default ''" 
-				) 
+            'id' => array (
+                    'sql' => "int(10) unsigned NOT NULL auto_increment"
+            ),
+            'pid' => array (
+                    'sql' => "int(10) unsigned NOT NULL default '0'"
+            ),
+            'tstamp' => array (
+                    'sql' => "int(10) unsigned NOT NULL default '0'"
+            ),
+            'title' => array (
+                    'label' => &$GLOBALS ['TL_LANG'] ['tl_reference_category'] ['title'],
+                    'exclude' => true,
+                    'search' => true,
+                    'inputType' => 'text',
+                    'eval' => array (
+                            'mandatory' => true,
+                            'maxlength' => 255
+                    ),
+                    'sql' => "varchar(255) NOT NULL default ''"
+            ),
+            'filterPage' => array
+            (
+                'label'                   => &$GLOBALS['TL_LANG']['tl_reference_category']['filterPage'],
+                'exclude'                 => true,
+                'inputType'               => 'pageTree',
+                'foreignKey'              => 'tl_page.title',
+                'eval'                    => array('mandatory'=>false, 'fieldType'=>'radio', 'tl_class'=>'clr'),
+                'sql'                     => "int(10) unsigned NOT NULL default '0'",
+                'relation'                => array('type'=>'hasOne', 'load'=>'eager')
+            ),
+            'show' => array
+            (
+                'label'                   => &$GLOBALS['TL_LANG']['tl_reference_category']['show'],
+                'exclude'                 => true,
+                'filter'                  => true,
+                'inputType'               => 'checkbox',
+                'sql'                     => "char(1) NOT NULL default ''"
+            )
 		) 
 );
 
