@@ -8,13 +8,14 @@ $GLOBALS['TL_LANG']['tl_reference']['category'] = array('Kategorie', 'Bitte wäh
 $GLOBALS['TL_LANG']['tl_reference']['teaser'] = array('Teaser', '');
 $GLOBALS['TL_LANG']['tl_reference']['description'] = array('Beschreibung', '');
 $GLOBALS['TL_LANG']['tl_reference']['image'] = array('Bild', '');
-
+$GLOBALS['TL_LANG']['tl_reference']['featured'] = array('hervorgehoben','');
 
 /**
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_reference']['reference_legend'] = 'Referenz';
 $GLOBALS['TL_LANG']['tl_reference']['category_legend'] = 'Kategorie';
+$GLOBALS['TL_LANG']['tl_reference']['extend_legend'] = 'erweiterte Einstellungen';
 
 /**
  * Buttons
