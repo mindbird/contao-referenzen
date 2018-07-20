@@ -6,7 +6,8 @@ use Contao\Model;
 
 class ReferenceModel extends Model {
 	protected static $strTable = 'tl_reference';
-	public static function findItems($intPid, $strReferenceName = '', $intCategory = 0, $intOffset = 0, $intLimit = 0, $strOrder = 'title ASC') {
+
+	public static function findItems($intPid, $strReferenceName = '', $intCategory = 0, $only_featured = 0, $intOffset = 0, $intLimit = 0, $strOrder = 'title ASC') {
 		$arrOptions = array ();
 		$arrOptions ['column'] [] = 'pid = ?';
 		$arrOptions ['value'] [] = $intPid;
@@ -20,6 +21,10 @@ class ReferenceModel extends Model {
 			$arrOptions ['column'] [] = 'category LIKE ?';
 			$arrOptions ['value'] [] = '%"' . $intCategory . '"%';
 		}
+		if ($only_featured == 1){
+            $arrOptions ['column'] [] = 'featured = ?';
+            $arrOptions ['value'] [] = 1;
+        }
 		
 		if ($intOffset > 0) {
 			$arrOptions ['offset'] = $intOffset;
