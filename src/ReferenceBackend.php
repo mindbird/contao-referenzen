@@ -2,9 +2,9 @@
 
 namespace Reference;
 
-use Contao\Database;
-use Reference\Models\ReferenceModel;
 use Contao\Backend;
+use Contao\Database;
+use Mindbird\Contao\Reference\Models\Reference;
 
 class ReferenceBackend extends Backend
 {
@@ -28,10 +28,10 @@ class ReferenceBackend extends Backend
         $objResult = $db->prepare("SELECT jumpTo, reference_archiv FROM tl_module WHERE type=?")->execute('reference_list');
         $arrModules = $objResult->fetchAllAssoc();
 
-        if (count($arrModules) > 0) {
-            $arrPids = array();
+        $arrPids = array();
+        if (\count($arrModules) > 0) {
             foreach ($arrModules as $arrModule) {
-                if (is_array($arrRoot) && count($arrRoot) > 0 && !in_array($arrModule ['jumpTo'], $arrRoot)) {
+                if (is_array($arrRoot) && \count($arrRoot) > 0 && !\in_array($arrModule ['jumpTo'], $arrRoot)) {
                     continue;
                 }
 
@@ -56,13 +56,15 @@ class ReferenceBackend extends Backend
 
                 $arrPids [] = $arrModule ['reference_archiv'];
             }
-            $references = ReferenceModel::findByPids($arrPids, 0, 0, array(
+            $references = Reference::findByPids($arrPids, 0, 0, array(
                 'order' => 'id ASC'
             ));
-            while ($references->next()) {
-                $arrReferences = $references->row();
-                $arrPages [] = $domain . $this->generateFrontendUrl($objParent->row(),
-                        '/referenceID/' . $arrReferences ['id'], $objParent->language);
+            if ($references !== null) {
+                while ($references->next()) {
+                    $arrReferences = $references->row();
+                    $arrPages [] = $domain . $this->generateFrontendUrl($objParent->row(),
+                            '/referenceID/' . $arrReferences ['id'], $objParent->language);
+                }
             }
         }
 
