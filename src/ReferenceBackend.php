@@ -1,6 +1,6 @@
 <?php
 
-namespace Reference;
+namespace Mindbird\Contao\Reference;
 
 use Contao\Backend;
 use Contao\Database;
@@ -11,10 +11,10 @@ class ReferenceBackend extends Backend
     /**
      * Hook for searchable pages
      *
-     * @param unknown $arrPages
+     * @param array $arrPages
      * @param number $intRoot
      * @param string $blnIsSitemap
-     * @return string
+     * @return array
      */
     public function getSearchablePages($arrPages, $intRoot = 0, $blnIsSitemap = false)
     {

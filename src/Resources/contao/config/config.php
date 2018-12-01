@@ -18,7 +18,7 @@ array_insert($GLOBALS ['FE_MOD'] ['reference'], 1, array(
 
 /** Hooks */
 $GLOBALS ['TL_HOOKS'] ['getSearchablePages'] [] = array(
-    'Reference\ReferenceBackend',
+    'Mindbird\Contao\Reference\ReferenceBackend',
     'getSearchablePages'
 );
 
