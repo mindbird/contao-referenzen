@@ -56,14 +56,14 @@ class ReferenceBackend extends Backend
 
                 $arrPids [] = $arrModule ['reference_archiv'];
             }
-            $references = Reference::findByPids($arrPids, 0, 0, array(
+            $references = Reference::findByPid($arrPids, array(
                 'order' => 'id ASC'
             ));
             if ($references !== null) {
                 while ($references->next()) {
                     $arrReferences = $references->row();
                     $arrPages [] = $domain . $this->generateFrontendUrl($objParent->row(),
-                            '/referenceID/' . $arrReferences ['id'], $objParent->language);
+                            '/' . $arrReferences ['id'], $objParent->language);
                 }
             }
         }
