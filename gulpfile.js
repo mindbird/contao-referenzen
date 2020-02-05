@@ -1,13 +1,13 @@
-const gulp = require('gulp');
+const { src, dest, parallel } = require('gulp');
 const concat = require('gulp-concat');
-const uglify = require('gulp-uglify-es').default;
 
-gulp.task('scripts', function() {
-    return gulp.src([
+function js() {
+    return src([
         './node_modules/isotope-layout/dist/isotope.pkgd.js'
-    ]).pipe(concat('script.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('./src/Resources/public/js'));
-});
+    ], { sourcemaps: true })
+        .pipe(concat('script.min.js'))
+        .pipe(dest('./src/Resources/public/js', { sourcemaps: true }))
+}
 
-gulp.task('default', ['scripts']);
+
+exports.default = parallel(js);

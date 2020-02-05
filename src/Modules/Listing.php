@@ -57,7 +57,6 @@ class Listing extends Module
             }
         }
 
-
         return parent::generate();
     }
 
@@ -91,6 +90,8 @@ class Listing extends Module
         } else {
             $this->Template->references = 'Mit den ausgewählten Filterkriterien sind keine Einträge vorhanden.';
         }
+
+        $this->Template->filterId = Input::get('filter');
     }
 
     /**

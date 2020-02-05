@@ -1,7 +1,7 @@
 <select name="referenceFilter">
-    <option data-filter="*">Alle Kategorien</option>
+    <option data-filter="*" name="filter">Alle Kategorien</option>
     <?php foreach($this->categories as $id => $name) : ?>
-        <option data-filter=".cat-<?= $id ?>"><?= $name ?></option>
+        <option data-filter=".cat-<?= $id ?>" value="<?= $id ?>"<?= $id === $filterId ? 'selected' : '' ?><?= $name ?></option>
     <?php endforeach; ?>
 </select>
 
