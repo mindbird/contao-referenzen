@@ -90,8 +90,6 @@ class Listing extends Module
         } else {
             $this->Template->references = 'Mit den ausgewählten Filterkriterien sind keine Einträge vorhanden.';
         }
-
-        $this->Template->filterId = Input::get('filter');
     }
 
     /**
@@ -151,6 +149,8 @@ class Listing extends Module
         }
         $template = new FrontendTemplate($this->strTemplateFilter);
         $template->categories = $filterCategories;
+
+        $template->filterId = Input::get('filter');
 
         return $template->parse();
     }

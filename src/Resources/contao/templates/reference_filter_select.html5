@@ -1,14 +1,15 @@
 <select name="referenceFilter">
     <option data-filter="*">Alle Kategorien</option>
     <?php foreach($this->categories as $id => $name) : ?>
-        <option data-filter=".cat-<?= $id ?>" value="<?= $id ?>"<?= $id === $filterId ? 'selected' : '' ?>><?= $name ?></option>
+        <option data-filter=".cat-<?= $id ?>" value="<?= $id ?>"<?= $id == $filterId ? 'selected' : '' ?>><?= $name ?></option>
     <?php endforeach; ?>
 </select>
 
 <script type="text/javascript">
-    $(window).load(function () {
+    $(function() {
         $('.mod_reference_list .filter [name=referenceFilter]').change(function() {
             $('.mod_reference_list .references').isotope({ filter: $(this).find(':checked').attr('data-filter') });
         });
+        $('.mod_reference_list .references').isotope({ filter: $('.mod_reference_list .filter [name=referenceFilter]').find(':checked').attr('data-filter') });
     });
 </script>
