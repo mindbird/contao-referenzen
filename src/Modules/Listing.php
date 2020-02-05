@@ -91,7 +91,7 @@ class Listing extends Module
             $this->Template->references = 'Mit den ausgewählten Filterkriterien sind keine Einträge vorhanden.';
         }
 
-        $this->Template->filterId = Input::get('referenceFilter');
+        $this->Template->filterId = Input::get('filter');
     }
 
     /**
