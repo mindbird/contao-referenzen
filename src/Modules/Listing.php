@@ -79,7 +79,7 @@ class Listing extends Module
         $strOrder = $this->reference_random ? 'RAND()' : 'title ASC';
         /** @var ReferenceArchive $referenceArchive */
         $referenceArchive = ReferenceArchive::findByPk($this->reference_archiv);
-        if ($referenceArchive->sort_order === 2) {
+        if ($referenceArchive->sort_order === "2") {
                 $strOrder = 'sorting ASC';
         }
 
